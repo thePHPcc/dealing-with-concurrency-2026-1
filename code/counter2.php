@@ -4,7 +4,7 @@ $fp = fopen('lock.txt', 'a');
 flock($fp, LOCK_EX);
 
 $count = $_GET['count'];
-usleep(100000);
+usleep(rand(0, 100000));
 
 file_put_contents('counter.txt', $count);
 file_put_contents('log.txt', $count . PHP_EOL, FILE_APPEND);
