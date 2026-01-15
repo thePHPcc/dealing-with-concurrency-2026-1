@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  php:
+    image: php:8.5-cli
+    volumes:
+      - ./code:/code:Z
+    working_dir: /code
+    depends_on:
+      - mysql
+      - redis
+    command: php -S 0.0.0.0:8000
+    environment:
+      - PHP_CLI_SERVER_WORKERS=10
+    ports:
+      - "8000:8000"
+
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: concurrency
+    ports:
+      - "3306:3306"
+
+  redis:
+    image: valkey/valkey:9-alpine3.23
+    ports:
+      - "6379:6379"
