@@ -15,3 +15,5 @@ $stmt->execute([$count]);
 $pdo->commit();
 
 echo $count . PHP_EOL;
+
+file_put_contents('log.txt', $count . PHP_EOL, FILE_APPEND);
