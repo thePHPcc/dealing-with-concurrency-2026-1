@@ -14,6 +14,27 @@ services:
     ports:
       - "8000:8000"
 
+  worker:
+    build: .
+    volumes:
+      - ./code:/code:Z
+    working_dir: /code
+    depends_on:
+      - mysql
+      - redis
+    restart: always
+    command: php /code/counter_queue_worker.php
+
+  event_worker:
+    build: .
+    volumes:
+      - ./code:/code:Z
+    working_dir: /code
+    depends_on:
+      - mysql
+    restart: always
+    command: php /code/counter_event_worker.php
+
   mysql:
     image: mysql:8.4
     environment:
