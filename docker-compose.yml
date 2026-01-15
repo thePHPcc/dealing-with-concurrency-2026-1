@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   php:
-    image: php:8.5-cli
+    build: .
     volumes:
       - ./code:/code:Z
     working_dir: /code
