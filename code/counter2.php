@@ -3,10 +3,8 @@
 $fp = fopen('lock.txt', 'a');
 flock($fp, LOCK_EX);
 
-$count = file_exists('counter.txt') ? (int)file_get_contents('counter.txt') : 0;
-$count++;
-
-usleep(10000);
+$count = $_GET['count'];
+usleep(100000);
 
 file_put_contents('counter.txt', $count);
 file_put_contents('log.txt', $count . PHP_EOL, FILE_APPEND);
